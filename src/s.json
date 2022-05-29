@@ -1,0 +1,27 @@
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "name": "vps-rental-pon-instance-a-svc-tcp"
+  },
+  "spec": {
+    "type": "LoadBalancer",
+    "selector": {
+      "kubevirt.io/domain": "vps-rental-pon-instance-a"
+    },
+    "ports": [
+      {
+        "protocol": "TCP",
+        "name": "tcp22",
+        "port": 22,
+        "targetPort": 22
+      },
+      {
+        "protocol": "TCP",
+        "name": "tcp25565",
+        "port": 25565,
+        "targetPort": 25565
+      }
+    ]
+  }
+}

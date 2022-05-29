@@ -1,4 +1,5 @@
 use crate::routes::virtual_machine;
+use crate::routes::service;
 use actix_web::{post, web, HttpResponse, Responder};
 use serde_yaml;
 
@@ -27,6 +28,18 @@ pub async fn vm(data: web::Json<virtual_machine::VirtualMachineRequest>) -> impl
         .to_string();
       HttpResponse::Ok().body(res)
     }
+    Err(e) => {
+      HttpResponse::BadRequest().body(format!("{{\"status\": \"Error\", \"reason\": \"{}\"}}", e))
+    }
+  }
+}
+
+#[post("/service")]
+pub async fn ser(data: web::Json<service::ServiceRequest>) -> impl Responder {
+  match serde_yaml::to_string(&service::Service::new(data.0)) {
+    Ok(v) => {
+      HttpResponse::Ok().body(v)
+    },
     Err(e) => {
       HttpResponse::BadRequest().body(format!("{{\"status\": \"Error\", \"reason\": \"{}\"}}", e))
     }
