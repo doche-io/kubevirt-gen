@@ -110,11 +110,11 @@ spec:
     kubevirt.io/domain: test
   ports:
     - protocol: TCP
-      name: tcp
+      name: tcp8080
       port: "8080"
       targetPort: "8080"
     - protocol: TCP
-      name: tcp
+      name: tcp25565
       port: "25565"
       targetPort: "25565"
 ```
@@ -138,11 +138,11 @@ spec:
     kubevirt.io/domain: test
   ports:
     - protocol: UDP
-      name: udp
+      name: udp19132
       port: "19132"
       targetPort: "19132"
     - protocol: UDP
-      name: udp
+      name: udp30000
       port: "30000"
       targetPort: "30000"
 ```
