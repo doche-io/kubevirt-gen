@@ -1,0 +1,95 @@
+{
+    "apiVersion": "kubevirt.io/v1",
+    "kind": "VirtualMachine",
+    "metadata": {
+      "name": "vps-rental-pon-instance-a"
+    },
+    "spec": {
+      "dataVolumeTemplates": [
+        {
+          "metadata": {
+            "name": "vps-rental-pon-instance-a-datavolume-a"
+          },
+          "spec": {
+            "pvc": {
+              "storageClassName": "nfs-client",
+              "accessModes": [
+                "ReadWriteOnce"
+              ],
+              "resources": {
+                "requests": {
+                  "storage": "48Gi"
+                }
+              }
+            },
+            "source": {
+              "registry": {
+                "url": "docker://quay.io/containerdisks/ubuntu:22.04"
+              }
+            }
+          }
+        }
+      ],
+      "running": true,
+      "template": {
+        "metadata": {
+          "labels": {
+            "kubevirt.io/size": "middle",
+            "kubevirt.io/domain": "vps-rental-pon-instance-a"
+          }
+        },
+        "spec": {
+          "domain": {
+            "devices": {
+              "disks": [
+                {
+                  "name": "containerdisk",
+                  "disk": {
+                    "bus": "virtio"
+                  }
+                },
+                {
+                  "name": "cloudinitdisk",
+                  "disk": {
+                    "bus": "virtio"
+                  }
+                }
+              ],
+              "interfaces": [
+                {
+                  "name": "default",
+                  "masquerade": {}
+                }
+              ]
+            },
+            "resources": {
+              "requests": {
+                "memory": "4G",
+                "cpu": "4"
+              }
+            }
+          },
+          "networks": [
+            {
+              "name": "default",
+              "pod": {}
+            }
+          ],
+          "volumes": [
+            {
+              "name": "containerdisk",
+              "dataVolume": {
+                "name": "vps-rental-pon-instance-a-datavolume-a"
+              }
+            },
+            {
+              "name": "cloudinitdisk",
+              "cloudInitNoCloud": {
+                "userData": "#cloud-config\nhostname: vps-rental-pon-instance-a\ndisable_root: false\nssh_authorized_keys:\n- ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINDvfo8n5KgKLlAywUbQ6rTbuKfgr6b6Ll3zkxVnWEwI\n"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
