@@ -95,7 +95,7 @@ enum LabelSize {
   Grande,
   Venti,
   Trenta,
-  ILLEGAL,
+  Illegal,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -308,7 +308,7 @@ struct VirtualMachineRequestCloudInit {
 
 fn kubevirt_size_s(cpu: u8, memory: u8) -> LabelSize {
   let n = cpu + memory;
-  let mut result = LabelSize::ILLEGAL;
+  let mut result = LabelSize::Illegal;
   if n <= 2 {
     result = LabelSize::Demi
   } else if n <= 4 {

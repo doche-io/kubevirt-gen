@@ -1,6 +1,5 @@
 use actix_web::{middleware::Logger, App, HttpServer};
 use clap::Parser;
-use tokio;
 pub mod routes;
 
 #[derive(Parser, Debug)]
