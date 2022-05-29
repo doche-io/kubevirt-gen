@@ -81,9 +81,7 @@ spec:
           - name: containerdisk
             dataVolume:
               name: vps-test-datavolume
-            cloudInitNoCloud: ~
           - name: cloudinitdisk
-            dataVolume: ~
             cloudInitNoCloud:
               userData: |
                 #cloud-config

@@ -24,6 +24,8 @@ pub async fn vm(data: web::Json<virtual_machine::VirtualMachineRequest>) -> impl
         .replacen("\\\"]", "\n                  ", 9999)
         .replacen("\\\",", "\n                  -", 9999)
         .replacen("\\\"", "", 9999)
+        .replacen("            dataVolume: ~\n", "", 9999)
+        .replacen("            cloudInitNoCloud: ~\n", "", 9999)
         .trim_end()
         .to_string();
       HttpResponse::Ok().body(res)
