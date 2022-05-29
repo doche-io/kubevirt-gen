@@ -8,6 +8,16 @@ cargo build --release
 リリースフラグを付けると幸せになれます。 <br>
 ビルド成果物はカレントディレクトリの`target/release/kubevirt-gen`に排出されます。
 
+## Test environment
+テスト環境。
+```
+OS: Arch Linux x86_64
+Kernel: 5.4.0-113-generic
+Host: ProLiant DL360 Gen9
+CPU: Intel Xeon E5-2680 v3 (48) @ 3.300GHz
+Memory: 48GiB
+```
+
 ## Usage
 Httpサーバーとして動きます。起動方法は以下の通りです。
 ```bash
