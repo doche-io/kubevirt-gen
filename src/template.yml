@@ -1,11 +1,11 @@
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
-  name: ${req.body.id}
+  name: vps-${req.body.id}
 spec:
   dataVolumeTemplates:
   - metadata:
-      name: ${req.body.id}-datavolume
+      name: vps-${req.body.id}-datavolume
     spec:
       pvc:
         storageClassName: ${req.body.storage.class}
@@ -46,7 +46,7 @@ spec:
       volumes:
       - name: containerdisk
         dataVolume:
-          name: ${req.body.id}-datavolume
+          name: vps-${req.body.id}-datavolume
       - name: cloudinitdisk
         cloudInitNoCloud:
           userData: |
