@@ -10,7 +10,7 @@ pub async fn vm(data: web::Json<virtual_machine::VirtualMachineRequest>) -> impl
       let mut res = v
         .replacen("\\n", "\n                ", 4)
         .replace("userData: ", "userData: |\n                ")
-        .replace("\"cloud", "cloud");
+        .replace("\"#cloud", "#cloud");
       res.pop();
       res.pop();
       res = res

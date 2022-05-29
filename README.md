@@ -76,7 +76,7 @@ spec:
             dataVolume: ~
             cloudInitNoCloud:
               userData: |
-                "#cloud-config
+                #cloud-config
                 hostname: test
                 disable_root: false
                 ssh_authorized_keys: 
