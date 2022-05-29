@@ -8,6 +8,7 @@ mod routes;
 struct Args {
   #[clap(short, long)]
   port: u16,
+  #[clap(short, long)]
   bind: String,
 }
 
