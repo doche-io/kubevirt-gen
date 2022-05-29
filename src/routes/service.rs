@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Service {
@@ -6,25 +6,25 @@ pub struct Service {
   api_version: String,
   kind: String,
   metadata: ServiceMetadata,
-  spec: ServiceSpec
+  spec: ServiceSpec,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 struct ServiceMetadata {
-  name: String
+  name: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 struct ServiceSpec {
   r#type: String,
   selector: ServiceSpecSelector,
-  ports: Vec<ServiceSpecPort>
+  ports: Vec<ServiceSpecPort>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 struct ServiceSpecSelector {
   #[serde(rename = "kubevirt.io/domain")]
-  domain: String
+  domain: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -33,7 +33,7 @@ struct ServiceSpecPort {
   name: String,
   port: String,
   #[serde(rename = "targetPort")]
-  target_port: String
+  target_port: String,
 }
 
 impl Service {
@@ -44,22 +44,20 @@ impl Service {
         protocol: req.protocol.clone(),
         name: req.protocol.clone().to_ascii_lowercase(),
         port: port.into(),
-        target_port: port.into()
+        target_port: port.into(),
       })
     }
     Service {
       api_version: "v1".into(),
       kind: "Service".into(),
       metadata: ServiceMetadata {
-        name: format!("vps-{}-svc-{}", &req.id, &req.protocol.to_ascii_lowercase())
+        name: format!("vps-{}-svc-{}", &req.id, &req.protocol.to_ascii_lowercase()),
       },
       spec: ServiceSpec {
         r#type: "LoadBalancer".into(),
-        selector: ServiceSpecSelector {
-          domain: req.id
-        },
-        ports
-      }
+        selector: ServiceSpecSelector { domain: req.id },
+        ports,
+      },
     }
   }
 }
@@ -68,5 +66,5 @@ impl Service {
 pub struct ServiceRequest {
   id: String,
   protocol: String,
-  ports: Vec<String>
+  ports: Vec<String>,
 }
