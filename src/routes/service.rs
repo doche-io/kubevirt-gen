@@ -42,7 +42,7 @@ impl Service {
     for port in &req.ports {
       ports.push(ServiceSpecPort {
         protocol: req.protocol.clone(),
-        name: req.protocol.clone().to_ascii_lowercase(),
+        name: format!("{}{}", &req.protocol.to_ascii_lowercase(), &port),
         port: port.into(),
         target_port: port.into(),
       })
